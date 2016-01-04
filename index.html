@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script>
+       var ipc = require('electron').ipcRenderer;
+
+
+        document.addEventListener("keydown", function (e) {
+              ipc.send("keydown", e.which);
+        });
+
+        document.addEventListener("keyup", function (e) {
+              ipc.send("keyup", e.which);
+        });
+
+
+
+    </script>
+  </head>
+  <body>
+    <h1>BB8 Sphero</h1>
+    <p>control bb8 with wqsd and space</p>	
+    <p>We are using node <script>document.write(process.versions.node)</script>,
+    Chrome <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.</p>
+  </body>
+</html>
+
