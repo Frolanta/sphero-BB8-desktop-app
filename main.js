@@ -79,9 +79,14 @@ droid.start(function() {
       case 27:
         droid.stop(function() {
           console.log("stop");
-          process.exit();
         });
         break;
+      case 38:
+        droid.increaseSpeed();
+        break;
+      case 40:
+        droid.decreaseSpeed();
+        break;    
       default:
         break;           
     }

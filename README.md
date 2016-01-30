@@ -1,25 +1,18 @@
 # sphero-BB8-desktop-app
 
-very very basic bb8 desktop app using sphero.js and electron
+Very very basic BB8 desktop app using sphero.js and Electron
 
-npm install sphero noble
+Installation:
 
-edit main.js (new bb8) with your bb8 uuid
-npm install -g electron-prebuilt
+- 'npm install sphero noble'
+- 'npm install -g electron-prebuilt'
+- edit main.js with your bb8 uuid
 
-controls are very basic; wasd to move and space to stop immediatly
+Informations:
 
-Only tested on OSX, our computer must have at least Bluetooh 4.0
+Controls are very basic; wasd to move, space to stop immediatly, up and down to control speed.
+Only tested on OSX, your computer must have at least Bluetooh 4.0.
 
-Will feature:
+Issue:
 
-GUI menu to select detected devices
-Rename your bb8
-Color selector
-Better controls (maybe different types)
-GUI collision indicator
-Battry indicator
-Gui for information as velocity / accelerometer datas / ...
-and more
-
-
+Could not find your BB8

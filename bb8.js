@@ -13,7 +13,8 @@ var BB8 = module.exports = function BB8(uuid) {
 	this.canMove = false;
 	this.batteryState = null;
 
-	this.speed = 50;
+	this.currentSpeed = 100;
+	this.speed = 100;
 	this.minSpeed = 50;
 	this.maxSpeed = 250;
 
@@ -37,7 +38,8 @@ BB8.prototype.start = function (callback) {
 
 		  setTimeout(function() {
 		  	  self.sphero.setStabilization(1);
-			  self.sphero.color({ red: 255, green: 255, blue: 255 });
+		  	  self.sphero.setInactivityTimeout(10);
+			  self.sphero.color({ red: 0, green: 0, blue: 0 });
 			  self.sphero.setBackLed(0);
 			  self.connected = true;
 			  self.sphero.getPowerState(function(err, data) {
@@ -62,7 +64,6 @@ BB8.prototype.start = function (callback) {
 BB8.prototype.stop = function (callback) {
 
 	var self = this;
-
 	self.sphero.disconnect(function () {
 		self.connected = false;
 		callback();
@@ -75,7 +76,7 @@ BB8.prototype.update = function () {
 	}
 
 	if (this.movingUp) {
-		this.speed = 100;
+		this.speed = this.currentSpeed;
 	} else {
 		this.speed = 0;
 	}
@@ -95,6 +96,7 @@ BB8.prototype.update = function () {
 	if (this.calibrating) {
 		console.log("heading: " + this.direction);
 		this.sphero.roll(0, this.direction);
+		//this.sphero.setHeading(this.direction);
 	} else {
 		this.sphero.roll(this.speed, this.direction);
 	}
@@ -136,6 +138,22 @@ BB8.prototype.stopMoveDown = function () {
 
 BB8.prototype.brake = function () {
 	this.speed = 0;
+}
+
+BB8.prototype.increaseSpeed = function () {
+	this.currentSpeed += 10;
+	if (this.currentSpeed > this.maxSpeed) {
+		this.currentSpeed = this.maxSpeed;
+	}
+	console.log("speed: " + this.currentSpeed);
+}
+
+BB8.prototype.decreaseSpeed = function () {
+	this.currentSpeed -= 10;
+	if (this.currentSpeed < this.minSpeed) {
+		this.currentSpeed = this.minSpeed;
+	}
+	console.log("speed: " + this.currentSpeed);
 }
 
 BB8.prototype.startCalibration = function () {
